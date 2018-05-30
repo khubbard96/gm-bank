@@ -30,7 +30,7 @@ var router = new director.http.Router({
 
 function check_bank(id){
   console.log(id);
-  console.log(this.req.chunks[0]);
+  console.log(this.req.chunks);
   //var message = this.req.chunks[0].text;
   //var message = this.req.chunks["text"];//groupme v3 message object
   //var sender = this.req.chunks[0]["user_id"];
