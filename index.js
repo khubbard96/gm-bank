@@ -4,6 +4,7 @@ const me_id = "";
 //var test_group_id = 27144950;
 var gm_api = require("groupme").Stateless;
 var http = require("http");
+var querystring = require("querystring");
 var director = require("director");
 var _ = require("underscore");
 var bot_id = "";
@@ -85,18 +86,32 @@ gm_api.Groups.index(a_token, function(err,ret){
 
 
 function bot_respond(id,payload){
-  var text = {
-    "bot_id":id,
-    "text":"hello world"
-  }
   var url = "https://api.groupme.com/v3/bots/post"
 
-  /*request({
-    url: url,
-    method: "POST",
-    json: true,
-    body: text
-  }, function (error, response, body){
-    console.log(response);
-  });*/
+  // Set up the request
+  var post_data = querystring.stringify({
+    'bot_id':id,
+    'text':"hello world"
+  })
+  var post_options = {
+      host: url,
+      port: '',
+      path: '',
+      method: 'POST',
+      headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+          'Content-Length': Buffer.byteLength(post_data)
+      }
+  };
+
+  var post_req = http.request(post_options, function(res) {
+    res.setEncoding('utf8');
+    res.on('data', function (chunk) {
+        console.log('Response: ' + chunk);
+    });
+  });
+
+  // post the data
+  post_req.write(post_data);
+  post_req.end();
 }
