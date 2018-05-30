@@ -29,6 +29,7 @@ var router = new director.http.Router({
 });
 
 function check_bank(bot_id){
+  console.log(bot_id);
   var message = this.req.chunks["text"];//groupme v3 message object
   var sender = this.req.chunks["user_id"];
   var commands = message.split(" ");
@@ -38,7 +39,7 @@ function check_bank(bot_id){
       break;
     case ""
   }*/
-
+  console.log(message);
   bot_respond(bot_id, message + " " + sender);
 
 }
@@ -57,9 +58,6 @@ function index(){
   this.res.end("this is a new page");
 }
 function log(param){
-  var chunk = this.req.chunks;
-  console.log(param);
-  console.log(chunk[0]);
 }
 
 var server = http.createServer(function (req, res) {
@@ -79,7 +77,7 @@ var server = http.createServer(function (req, res) {
 //groupme stuff
 
 gm_api.Groups.index(a_token, function(err,ret){
-  console.log(ret);
+  //console.log(ret);
 });
 
 
