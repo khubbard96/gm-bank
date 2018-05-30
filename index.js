@@ -30,17 +30,18 @@ var router = new director.http.Router({
 
 function check_bank(id){
   console.log(id);
-  var message = this.req.chunks["text"];//groupme v3 message object
-  var sender = this.req.chunks["user_id"];
-  var commands = message.split(" ");
+  console.log(this.req);
+  //var message = this.req.chunks["text"];//groupme v3 message object
+  //var sender = this.req.chunks["user_id"];
+  //var commands = message.split(" ");
   /*switch(command[0]){
     case "balance":
 
       break;
     case ""
   }*/
-  console.log(message);
-  bot_respond(id, message + " " + sender);
+  //console.log(message);
+  //bot_respond(id, message + " " + sender);
 
 }
 
