@@ -1,12 +1,10 @@
-var Ajax = require("simple-ajax");
+(function(){
+  console.log("posting some data");
 
-console.log("Posting");
+  $.ajax({
+    url:"http://localhost:8080/index" + "/something",
+    method: "POST",
+    data:"posting some data"
+  });
 
-var test_post = new Ajax({
-  url:"http://localhost:3000",
-  method:"POST",
-  data:{"info":"Hello Server"},
-});
-test_post.on("success",function(event){
-  console.log("success ",event);
-});
+})();

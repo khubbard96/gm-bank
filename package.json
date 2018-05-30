@@ -8,8 +8,10 @@
     "groupme": "^0.5.7",
     "http-server": "^0.11.1",
     "jquery": "^3.3.1",
+    "request": "^2.12.0",
     "simple-ajax": "^2.6.0",
-    "serialport": "^4.0.7"
+    "serialport": "^4.0.7",
+    "underscore": "^1.9.0"
   },
   "devDependencies": {},
   "scripts": {
