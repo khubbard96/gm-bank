@@ -28,8 +28,8 @@ var router = new director.http.Router({
   }
 });
 
-function check_bank(bot_id){
-  console.log(bot_id);
+function check_bank(id){
+  console.log(id);
   var message = this.req.chunks["text"];//groupme v3 message object
   var sender = this.req.chunks["user_id"];
   var commands = message.split(" ");
@@ -40,7 +40,7 @@ function check_bank(bot_id){
     case ""
   }*/
   console.log(message);
-  bot_respond(bot_id, message + " " + sender);
+  bot_respond(id, message + " " + sender);
 
 }
 
