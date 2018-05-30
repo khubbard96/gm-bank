@@ -7,10 +7,17 @@ var router = new director.http.Router({
   '/'    : {
     get: ping,
   },
+  '/index': {
+    get: index,
+  }
 });
 function ping(){
   this.res.writeHead(200);
   this.res.end("robots");
+}
+function index(){
+  this.res.writeHead(200);
+  this.res.end("this is a new page");
 }
 
 var server = http.createServer(function (req, res) {
