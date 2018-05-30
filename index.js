@@ -7,7 +7,7 @@ var http = require("http");
 var director = require("director");
 var _ = require("underscore");
 var bot_id = "";
-var request = require("request");
+//var request = require("request");
 
 var bot_ids = {};
 
@@ -91,12 +91,12 @@ function bot_respond(id,payload){
   }
   var url = "https://api.groupme.com/v3/bots/post"
 
-  request({
+  /*request({
     url: url,
     method: "POST",
     json: true,
     body: text
   }, function (error, response, body){
     console.log(response);
-  });
+  });*/
 }
