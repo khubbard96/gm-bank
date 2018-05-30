@@ -29,6 +29,7 @@ var router = new director.http.Router({
 });
 
 function check_bank(id){
+  console.log("what is happening");
   console.log(id);
   console.log(this);
   //var message = this.req.chunks[0].text;
