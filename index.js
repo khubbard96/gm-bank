@@ -91,7 +91,7 @@ function bot_respond(id,payload){
   // Set up the request
   var post_data = querystring.stringify({
     'bot_id':id,
-    'text':"hello world"
+    'text':payload
   })
   var post_options = {
       host: url,
