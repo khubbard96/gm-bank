@@ -1,0 +1,19 @@
+{
+  "name": "gm-bank",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/khubbard96/gm-bank.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/khubbard96/gm-bank/issues"
+  },
+  "homepage": "https://github.com/khubbard96/gm-bank#readme"
+}
