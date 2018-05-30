@@ -23,7 +23,7 @@ var router = new director.http.Router({
   '/bank':{
     post:check_bank,
   },
-  '/request/:id'{
+  '/request/:id':{
     post:check_bank,
   }
 });
