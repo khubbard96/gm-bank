@@ -31,7 +31,7 @@ var router = new director.http.Router({
 function check_bank(id){
   console.log("what is happening");
   console.log(id);
-  console.log(this);
+  console.log(this.req.chunks);
   //var message = this.req.chunks[0].text;
   //var message = this.req.chunks["text"];//groupme v3 message object
   //var sender = this.req.chunks[0]["user_id"];
@@ -43,7 +43,7 @@ function check_bank(id){
     case ""
   }*/
   //console.log(message);
-  bot_respond(id, message + " " + sender);
+  //bot_respond(id, message + " " + sender);
 
 }
 
