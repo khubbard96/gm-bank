@@ -18,6 +18,7 @@ var bot_ids = {};
 
 
 function check_bank(id){
+  console.log(this.req.chunks);
   var chunk = JSON.parse(this.req.chunks[0]);
   var message = chunk.text;
   var commands = [];
@@ -33,7 +34,7 @@ function check_bank(id){
     case ""
   }*/
   //console.log(message);
-  bot_respond(id, message + " " + sender);
+  if(sender != 642101) bot_respond(id, message + " " + sender);
 
 }
 function ping(){
