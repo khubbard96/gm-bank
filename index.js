@@ -33,7 +33,7 @@ function check_bank(id){
   var chunk = JSON.parse(this.req.chunks[0]);
   var message = chunk.text;
   var commands = [];
-  var sender = chunk.sender_id;
+  var sender = chunk.user_id;
   //var message = this.req.chunks[0].text;
   //var message = this.req.chunks["text"];//groupme v3 message object
   //var sender = this.req.chunks[0]["user_id"];
