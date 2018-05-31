@@ -1,33 +1,21 @@
 const a_token = "2bZngeBs5EhhOwUoK1BaoBdtsBlDIbj3Mt2UGuUJ";
-const me_id = "";
+const me_id = "13902754";
 //var dp_group_id = 13347275;
 //var test_group_id = 27144950;
-var gm_api = require("groupme").Stateless;
-var http = require("http");
-var https = require("https");
-var querystring = require("querystring");
-var director = require("director");
-var _ = require("underscore");
+const gm_api = require("groupme").Stateless;
+const http = require("http");
+const https = require("https");
+const querystring = require("querystring");
+const director = require("director");
+const _ = require("underscore");
+
+
 var bot_id = "";
 //var request = require("request");
 
 var bot_ids = {};
 
-var router = new director.http.Router({
-  '/'    : {
-    get: ping,
-  },
-  '/index/:param': {
-    get: index,
-    post: log
-  },
-  '/bank':{
-    post:check_bank,
-  },
-  '/request/:id':{
-    post:check_bank,
-  }
-});
+
 
 function check_bank(id){
   var chunk = JSON.parse(this.req.chunks[0]);
@@ -48,12 +36,6 @@ function check_bank(id){
   bot_respond(id, message + " " + sender);
 
 }
-
-
-
-
-
-
 function ping(){
   this.res.writeHead(200);
   this.res.end("robots");
@@ -65,6 +47,33 @@ function index(){
 function log(param){
 }
 
+
+
+//groupme stuff
+
+gm_api.Groups.index(a_token, function(err,ret){
+  //console.log(ret);
+});
+
+/*UNDER THE HOOD STUFF - Server, POST requests, etc*/
+
+//router for requests
+var router = new director.http.Router({
+  '/'    : {
+    get: ping,
+  },
+  '/index/:param': {
+    get: index,
+    post: log
+  },
+  '/bank':{
+    post:check_bank,
+  },
+  '/request/:id':{
+    post:check_bank,
+  }
+});
+//basic server obj
 var server = http.createServer(function (req, res) {
   req.chunks = [];
 
@@ -78,16 +87,7 @@ var server = http.createServer(function (req, res) {
     res.end(err.message);
   });
 }).listen(8080);
-
-//groupme stuff
-
-gm_api.Groups.index(a_token, function(err,ret){
-  //console.log(ret);
-});
-
-
-
-
+//causes the bot to respond in the group
 function bot_respond(id,payload){
   var postData = {
     "bot_id": "1a9e83c8c3ef13416e6b8ab00c",
@@ -108,10 +108,5 @@ function bot_respond(id,payload){
   req.on('timeout', function(err) {
     console.log('timeout posting message '  + JSON.stringify(err));
   });
-  // write data to request body
-  //req.write(postData);
-
-
   req.end(JSON.stringify(postData));
 }
-//bot_respond("1a9e83c8c3ef13416e6b8ab00c","hello world");
