@@ -4,6 +4,7 @@ const me_id = "";
 //var test_group_id = 27144950;
 var gm_api = require("groupme").Stateless;
 var http = require("http");
+var https = require("https");
 var querystring = require("querystring");
 var director = require("director");
 var _ = require("underscore");
@@ -88,32 +89,29 @@ gm_api.Groups.index(a_token, function(err,ret){
 
 
 function bot_respond(id,payload){
-  var url = "https://api.groupme.com/v3/bots/post"
-
-  // Set up the request
-  var post_data = querystring.stringify({
-    'bot_id':id,
-    'text':payload
-  })
-  var post_options = {
-      host: url,
-      port: '',
-      path: '',
-      method: 'POST',
-      headers: {
-          'Content-Type': 'application/x-www-form-urlencoded',
-          'Content-Length': Buffer.byteLength(post_data)
-      }
+  var postData = {
+    "bot_id": "1a9e83c8c3ef13416e6b8ab00c",
+    "text": payload
   };
-
-  var post_req = http.request(post_options, function(res) {
-    res.setEncoding('utf8');
-    res.on('data', function (chunk) {
-        console.log('Response: ' + chunk);
-    });
+  var options = {
+    hostname: 'api.groupme.com',
+    path: '/v3/bots/post',
+    method: 'POST',
+  };
+  var req = https.request(options, function(res) {
+    console.log('Status: ' + res.statusCode);
+    console.log('Headers: ' + JSON.stringify(res.headers));
   });
+  req.on('error', function(e) {
+    console.log('problem with request: ' + e.message);
+  });
+  req.on('timeout', function(err) {
+    console.log('timeout posting message '  + JSON.stringify(err));
+  });
+  // write data to request body
+  //req.write(postData);
 
-  // post the data
-  post_req.write(post_data);
-  post_req.end();
+
+  req.end(JSON.stringify(postData));
 }
+//bot_respond("1a9e83c8c3ef13416e6b8ab00c","hello world");
