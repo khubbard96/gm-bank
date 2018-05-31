@@ -1,13 +1,13 @@
 const a_token = "2bZngeBs5EhhOwUoK1BaoBdtsBlDIbj3Mt2UGuUJ";
 const me_id = "13902754";
-//var dp_group_id = 13347275;
-//var test_group_id = 27144950;
+
 const gm_api = require("groupme").Stateless;
 const http = require("http");
 const https = require("https");
 const querystring = require("querystring");
 const director = require("director");
 const _ = require("underscore");
+const call_command = "bank";
 
 
 var bot_id = "";
@@ -20,21 +20,20 @@ var bot_ids = {};
 function check_bank(id){
   console.log(this.req.chunks);
   var chunk = JSON.parse(this.req.chunks[0]);
-  var message = chunk.text;
-  var commands = [];
+  var commands = chunk.text.split[" "];
+  if(commands[0] != call_command) return;
   var sender = chunk.user_id;
-  //var message = this.req.chunks[0].text;
-  //var message = this.req.chunks["text"];//groupme v3 message object
-  //var sender = this.req.chunks[0]["user_id"];
-  //var commands = message.split(" ");
-  /*switch(command[0]){
-    case "balance":
+  var bot_message = chunk.sender_type == "bot";
+  var group = chunk.group_id;
 
-      break;
-    case ""
-  }*/
-  //console.log(message);
-  if(sender != 642101) bot_respond(id, message + " " + sender);
+  var mentions = _.find(chunk.attachments, function(a){
+    return a.type == "mentions";
+  });
+  var mentioned_ids = mentions ? mentions.user_ids || [];
+
+  if(!bot_message) bot_respond(id, message + " " + sender);
+
+  bank[commands[1]](mentioned_ids);
 
 }
 function ping(){
@@ -49,12 +48,27 @@ function log(param){
 }
 
 
+//bank command handler
+var bank = {
+  balance_info: function(name, balance){
+    this.name = name;
+    this.balance = balance;
+  }
+  balance: function(mentioned){
+    var all_info = [];
+    _.each(mentioned,function(user){
 
-//groupme stuff
+      all_info.push(new bank.balance_info(user_name, user_balance));
+    });
+    return all_info;c
+  },
 
-gm_api.Groups.index(a_token, function(err,ret){
-  //console.log(ret);
-});
+}
+
+
+
+
+
 
 /*UNDER THE HOOD STUFF - Server, POST requests, etc*/
 
@@ -88,6 +102,7 @@ var server = http.createServer(function (req, res) {
     res.end(err.message);
   });
 }).listen(8080);
+
 //causes the bot to respond in the group
 function bot_respond(id,payload){
   var postData = {
