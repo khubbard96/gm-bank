@@ -10,6 +10,11 @@ const _ = require("underscore");
 const call_command = "bank";
 
 
+var postData = {
+  "bot_id": "1a9e83c8c3ef13416e6b8ab00c",
+  "text": payload
+};
+
 var bot_id = "";
 //var request = require("request");
 
@@ -104,11 +109,10 @@ var server = http.createServer(function (req, res) {
 }).listen(8080);
 
 //causes the bot to respond in the group
-function bot_respond(id,payload){
-  var postData = {
-    "bot_id": "1a9e83c8c3ef13416e6b8ab00c",
-    "text": payload
-  };
+function make_request(requestData, requestOptions){
+  if(!requestData || !requestOptions){
+    return false;
+  }
   var options = {
     hostname: 'api.groupme.com',
     path: '/v3/bots/post',
@@ -120,9 +124,14 @@ function bot_respond(id,payload){
   });
   req.on('error', function(e) {
     console.log('problem with request: ' + e.message);
+    req.end();
+    return false;
   });
   req.on('timeout', function(err) {
     console.log('timeout posting message '  + JSON.stringify(err));
+    req.end();
+    return false;
   });
   req.end(JSON.stringify(postData));
+  return true;
 }
